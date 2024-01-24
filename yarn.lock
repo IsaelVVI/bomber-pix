@@ -1609,7 +1609,7 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.4.15.tgz#e7d2ea050c667480cb5e1a6df2ac13bcd03a8f30"
   integrity sha512-KzfPTxVaWfB+eGcGdbSf4CWdaXcGDqckoeXUh7SB3fZdEtzPCK2Vq9B/lRRL3yutax/LWITz+SwvgyOxz5V75g==
 
-"@vueuse/core@^10.1.2":
+"@vueuse/core@10.7.2", "@vueuse/core@^10.1.2":
   version "10.7.2"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-10.7.2.tgz#78917803a29a0bca1803a6521fdf7ff873f6e72c"
   integrity sha512-AOyAL2rK0By62Hm+iqQn6Rbu8bfmbgaIMXcE3TSr7BdQ42wnSFlwIdPjInO62onYsEMK/yDMU8C6oGfDAtZ2qQ==
@@ -1623,6 +1623,17 @@
   version "10.7.2"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-10.7.2.tgz#ba0187ce138c287fd80301afc5b0d6a97e563633"
   integrity sha512-kCWPb4J2KGrwLtn1eJwaJD742u1k5h6v/St5wFe8Quih90+k2a0JP8BS4Zp34XUuJqS2AxFYMb1wjUL8HfhWsQ==
+
+"@vueuse/nuxt@^10.7.2":
+  version "10.7.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/nuxt/-/nuxt-10.7.2.tgz#20e74cfcbc28d80ca0d9eaaa85dc08b50995e85c"
+  integrity sha512-yv2hY4AiRoSqg9ELNpN6gOkDWxGuLiKE/bEbuTAAuUBhS5OeEDf5aB/kY0e/V6ZXj5XiU4LX3nE8YV8c+UKfmQ==
+  dependencies:
+    "@nuxt/kit" "^3.9.1"
+    "@vueuse/core" "10.7.2"
+    "@vueuse/metadata" "10.7.2"
+    local-pkg "^0.5.0"
+    vue-demi ">=0.14.6"
 
 "@vueuse/shared@10.7.2":
   version "10.7.2"
@@ -4274,6 +4285,11 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
+pixi-projection@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pixi-projection/-/pixi-projection-1.0.0.tgz#4120f63157996a74bb3272ddfdbf461ef63b881d"
+  integrity sha512-+fV7SA69OLxNR3nXOoR6Z5vFTqcp3oH/+sHXsQ+Jw6J9nOK+APzlrnCcO3ftB9Y/GIVgR3+HIDpKpRWe6EPPSw==
+
 pixi.js@^7.3.2, pixi.js@^7.3.3:
   version "7.3.3"
   resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-7.3.3.tgz#dd791242460c1a7651de80ae8f91bfe9c91f2712"
@@ -5728,6 +5744,16 @@ vue-router@^4.2.5:
   integrity sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
+
+vue3-pixi-projection@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/vue3-pixi-projection/-/vue3-pixi-projection-0.9.0.tgz#4a57f39b471e033c8184210ff98247e1dba0edd6"
+  integrity sha512-Om94M7aCcSHpTS7wboKUCvOMe5Abmjq5FSC9MfJVSwmp6vXVuBdymqlGaGws1L2gRu+jA23u2+F0vUZNfFFPiw==
+  dependencies:
+    "@antfu/utils" "^0.7.2"
+    pixi-projection "^1.0.0"
+    vue-demi "^0.14.1"
+    vue3-pixi "^0.9.0"
 
 vue3-pixi@^0.9.0:
   version "0.9.0"
