@@ -7,6 +7,9 @@
 <script setup lang="ts">
 import * as PIXI from 'pixi.js';
 
+
+
+
 let app: PIXI.Application<HTMLCanvasElement>
 const character = ref<PIXI.Sprite>(new PIXI.Sprite)
 
