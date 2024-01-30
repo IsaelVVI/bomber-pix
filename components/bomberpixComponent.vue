@@ -13,35 +13,38 @@ const game = kaboom({
 
 const MOVE_SPEED = 100
 
-game.loadSprite("bomber", "./assets/characters/bomber_alt.png", {
-  sliceX: 3,
-  sliceY: 4,
+const pressed_key = ref("")
+const anim_play = ref("")
+
+game.loadSprite("bomber", "./assets/characters/bomberman.png", {
+  sliceX: 9,
+  sliceY: 20,
   anims: {
   // animações paradas
     idle_left: {
-      from: 9, to: 9
+      from: 27, to: 27
     },
     idle_right: {
-      from: 3, to: 3
+      from: 9, to: 9
     },
     idle_up: {
       from: 0, to: 0
     },
     idle_down: {
-      from: 6, to: 6
+      from: 18, to: 18
     },
   // animações andando
     walk_left: {
-      from: 9, to: 11
+      from: 27, to: 29
     },
     walk_right: {
-      from: 3, to:5
+      from: 9, to:11
     },
     walk_up: {
       from: 0, to: 2
     },
     walk_down: {
-      from: 6, to: 8
+      from: 18, to: 20
     }
   }
 })
@@ -89,11 +92,12 @@ game.scene('game', () => {
 
   const player = game.add([
       game.sprite('bomber', {
-        animSpeed: 0.1,
-        frame: 6,
+        animSpeed: 1,
+        frame: 18,
       }),
       game.pos(6, 0),
       game.area({
+        offset: game.vec2(8, 0),
         shape: new Rect(game.vec2(0, 14), 16, 16),
       }),
       game.body(),
@@ -117,20 +121,108 @@ game.scene('game', () => {
   })*/
 
   game.onKeyDown('left', () => {
-    player.move(-MOVE_SPEED, 0)
-    player.dir = game.vec2(-1, 0)
+    if(pressed_key.value === "" || pressed_key.value === 'left'){
+      pressed_key.value = 'left'
+      player.move(-MOVE_SPEED, 0)
+      player.dir = game.vec2(-1, 0)
+    }
+
+
   })
   game.onKeyDown('right', () => {
-    player.move(MOVE_SPEED, 0)
-    player.dir = game.vec2(-1, 0)
+    if(pressed_key.value === "" || pressed_key.value === 'right'){
+      pressed_key.value = 'right'
+      player.move(MOVE_SPEED, 0)
+      player.dir = game.vec2(-1, 0)
+    }
   })
   game.onKeyDown('up', () => {
-    player.move(0, -MOVE_SPEED)
-    player.dir = game.vec2(-1, 0)
+    if(pressed_key.value === "" || pressed_key.value === 'up'){
+      pressed_key.value = 'up'
+      player.move(0, -MOVE_SPEED)
+      player.dir = game.vec2(-1, 0)
+    }
+
   })
   game.onKeyDown('down', () => {
-    player.move(0, MOVE_SPEED)
-    player.dir = game.vec2(-1, 0)
+    if(pressed_key.value === "" || pressed_key.value === 'down'){
+      pressed_key.value = 'down'
+      player.move(0, MOVE_SPEED)
+      player.dir = game.vec2(-1, 0)
+    }
+
+  })
+
+  game.onKeyRelease("left", () => {
+    if(!game.isKeyDown() || pressed_key.value === "left"){
+      pressed_key.value = ''
+      anim_play.value = ""
+      if(!game.isKeyDown()) player.play('idle_left', {speed: 10})
+    }
+  })
+
+  game.onKeyRelease("right", () => {
+    if(!game.isKeyDown() || pressed_key.value === "right"){
+      pressed_key.value = ''
+      anim_play.value = ""
+      if(!game.isKeyDown()) player.play('idle_right', {speed: 10})
+    }
+  })
+
+  game.onKeyRelease("up", () => {
+    if(!game.isKeyDown() || pressed_key.value === "up"){
+      pressed_key.value = ''
+      anim_play.value = ""
+      if(!game.isKeyDown()) player.play('idle_up', {speed: 10})
+    }
+  })
+
+  game.onKeyRelease("down", () => {
+    if(!game.isKeyDown() || pressed_key.value === "down"){
+      pressed_key.value = ''
+      anim_play.value = ""
+      if(!game.isKeyDown()) player.play('idle_down', {speed: 10})
+    }
+  })
+
+  game.onKeyPress('left', () => {
+    if(game.isKeyDown('right') || game.isKeyDown('up') || game.isKeyDown('down')) return
+    if(player.curAnim() !== "walk_left"){
+      anim_play.value = "walk_left"
+      player.play('walk_left', {speed: 10, loop: true})
+    }else {
+      return
+    }
+  })
+
+  game.onKeyPress('right', () => {
+    if(game.isKeyDown('left') || game.isKeyDown('up') || game.isKeyDown('down')) return
+    if(player.curAnim() !== "walk_right"){
+      anim_play.value = "walk_right"
+      player.play('walk_right', {speed: 10, loop: true})
+    }else {
+      return
+    }
+  })
+
+  game.onKeyPress('up', () => {
+    if(game.isKeyDown('left') || game.isKeyDown('right') || game.isKeyDown('down')) return
+    if(player.curAnim() !== "walk_up"){
+      anim_play.value = "walk_up"
+      player.play('walk_up', {speed: 10, loop: true})
+    }else {
+      return
+    }
+  })
+
+  game.onKeyPress('down', () => {
+    if(game.isKeyDown('left') || game.isKeyDown('right') || game.isKeyDown('up')) return
+    if(player.curAnim() !== "walk_down"){
+      anim_play.value = "walk_down"
+      player.play('walk_down', {speed: 10, loop: true})
+    }else {
+      return
+    }
   })
 
 })
