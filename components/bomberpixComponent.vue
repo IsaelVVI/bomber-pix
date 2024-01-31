@@ -6,6 +6,14 @@
 
 import kaboom from "kaboom";
 
+const socket = useNuxtApp().$nuxtSocket({name: 'bomberpix'})
+
+socket.emit('newMessage', 'ola')
+
+socket.on('messageClient', (args) => {
+  alert(args)
+})
+
 const game = kaboom({
   scale: 4,
   background: '#000000'

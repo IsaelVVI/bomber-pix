@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: [
     '@vueuse/nuxt',
+    'nuxt-socket-io'
   ],
   ssr: false,
   postcss: {
@@ -12,4 +13,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  io: {
+    sockets: [
+      {
+        name: 'bomberpix',
+        url: 'ws://localhost:3003'
+      }
+    ]
+  }
 })

@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@vueuse/nuxt": "^10.7.2",
-    "kaboom": "^3000.1.17"
+    "kaboom": "^3000.1.17",
+    "nuxt-socket-io": "^3.0.13",
+    "socket.io-client": "^4.7.4"
   }
 }
