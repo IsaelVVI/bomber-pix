@@ -6,6 +6,7 @@
 
 
 import kaboom from "kaboom";
+import type {Key} from "kaboom";
 import type {PlayerInterface} from "~/interfaces";
 
 const { width, height } = useWindowSize()
@@ -20,7 +21,7 @@ const game = kaboom({
   background: '#000000',
 })
 
-const MOVE_SPEED = 1
+const MOVE_SPEED = 80
 
 const pressed_key = ref("")
 const anim_play = ref("")
@@ -69,19 +70,19 @@ game.scene('game', () => {
   const maps = [
     [
       'bbbbbbbbbbbbbbb',
+      'bgrgggggggggggb',
+      'brbgbgbgbgbgbgb',
       'bgggggggggggggb',
       'bgbgbgbgbgbgbgb',
       'bgggggggggggggb',
       'bgbgbgbgbgbgbgb',
-      'bgggggggggggggb',
+      'bgggrgggggggggb',
       'bgbgbgbgbgbgbgb',
       'bgggggggggggggb',
       'bgbgbgbgbgbgbgb',
-      'bgggggggggggggb',
+      'bgggrgggggrgggb',
       'bgbgbgbgbgbgbgb',
-      'bgggggggggggggb',
-      'bgbgbgbgbgbgbgb',
-      'bgggggggggggggb',
+      'bgggrgggggggggb',
       'bbbbbbbbbbbbbbb',
     ]
   ]
@@ -149,10 +150,12 @@ game.scene('game', () => {
           }),
           game.pos(randx,randy),
           game.area({
-            offset: game.vec2(6, 0),
-            shape: new Rect(game.vec2(2.5, 14), 16, 16),
+            offset: game.vec2(9, 0),
+            shape: new Rect(game.vec2(2.5, 14), 10, 10),
           }),
-          game.body(),
+          game.body({
+            mass: 1000
+          }),
           // eixo vetor 2 direção inicial, pra frente na horizontal
           {dir: game.vec2(0,20)}
         ])
@@ -168,17 +171,15 @@ game.scene('game', () => {
 
   socket.on('playerMovements', (args: PlayerMovementInterface) => {
     players.forEach(player => {
-      if(args.id === player.id){
+      if(args.id === player.id && args.id !== socket.id){
         player.player.pos.x = args.x
         player.player.pos.y = args.y
       }
     })
-
-
   })
 
 
-  game.onKeyDown('left', () => {
+  /*game.onKeyDown('left', () => {
       socket.emit('movement', {
         x: <number>players.find(player => player.id === socket.id)?.player.pos.x - MOVE_SPEED,
         y: <number>players.find(player => player.id === socket.id)?.player.pos.y
@@ -204,79 +205,72 @@ game.scene('game', () => {
       x: <number>players.find(player => player.id === socket.id)?.player.pos.x,
       y: <number>players.find(player => player.id === socket.id)?.player.pos.y + MOVE_SPEED
     })
-  })
+  })*/
 
 
-  /*  game.onKeyDown('left', () => {
-      if(pressed_key.value === "" || pressed_key.value === 'left'){
+    game.onKeyDown('left', () => {
         pressed_key.value = 'left'
-        player.move(-MOVE_SPEED, 0)
-        player.dir = game.vec2(-1, 0)
-      }
-
-
+        players.find(player => player.id === socket.id)?.player.move(-MOVE_SPEED, 0)
     })
+
     game.onKeyDown('right', () => {
-      if(pressed_key.value === "" || pressed_key.value === 'right'){
         pressed_key.value = 'right'
-        player.move(MOVE_SPEED, 0)
-        player.dir = game.vec2(-1, 0)
-      }
+        players.find(player => player.id === socket.id)?.player.move(MOVE_SPEED, 0)
     })
+
     game.onKeyDown('up', () => {
-      if(pressed_key.value === "" || pressed_key.value === 'up'){
         pressed_key.value = 'up'
-        player.move(0, -MOVE_SPEED)
-        player.dir = game.vec2(-1, 0)
-      }
-
+        players.find(player => player.id === socket.id)?.player.move(0, -MOVE_SPEED)
     })
+
     game.onKeyDown('down', () => {
-      if(pressed_key.value === "" || pressed_key.value === 'down'){
         pressed_key.value = 'down'
-        player.move(0, MOVE_SPEED)
-        player.dir = game.vec2(-1, 0)
-      }
-
+        players.find(player => player.id === socket.id)?.player.move(0, MOVE_SPEED)
     })
+
+    game.onKeyDown((key: Key) => {
+      if (key === 'left' || key === 'right' || key === 'up' || key === 'down'){
+        socket.emit('movement', {
+          ...players.find(player => player.id === socket.id)?.player.pos
+        })
+      }
+    })
+
 
     game.onKeyRelease("left", () => {
-      if(!game.isKeyDown() || pressed_key.value === "left"){
-        pressed_key.value = ''
-        anim_play.value = ""
-        if(!game.isKeyDown()) player.play('idle_left', {speed: 10})
-      }
+      socket.emit('anim', "idle_left")
+      if(!game.isKeyDown()) players.find(player => player.id === socket.id)?.player.play('idle_left', {speed: 10})
     })
 
     game.onKeyRelease("right", () => {
-      if(!game.isKeyDown() || pressed_key.value === "right"){
+        socket.emit('anim', "idle_right")
+        if(!game.isKeyDown()) players.find(player => player.id === socket.id)?.player.play('idle_right', {speed: 10})
+      /*if(!game.isKeyDown() || pressed_key.value === "right"){
         pressed_key.value = ''
         anim_play.value = ""
-        if(!game.isKeyDown()) player.play('idle_right', {speed: 10})
-      }
+      }*/
     })
 
     game.onKeyRelease("up", () => {
-      if(!game.isKeyDown() || pressed_key.value === "up"){
-        pressed_key.value = ''
-        anim_play.value = ""
-        if(!game.isKeyDown()) player.play('idle_up', {speed: 10})
-      }
+        socket.emit('anim', "idle_up")
+        if(!game.isKeyDown()) players.find(player => player.id === socket.id)?.player.play('idle_up', {speed: 10})
     })
 
     game.onKeyRelease("down", () => {
-      if(!game.isKeyDown() || pressed_key.value === "down"){
+        socket.emit('anim', "idle_down")
+        if(!game.isKeyDown()) players.find(player => player.id === socket.id)?.player.play('idle_down', {speed: 10})
+      /*if(!game.isKeyDown() || pressed_key.value === "down"){
         pressed_key.value = ''
         anim_play.value = ""
-        if(!game.isKeyDown()) player.play('idle_down', {speed: 10})
-      }
+      }*/
     })
 
     game.onKeyPress('left', () => {
       if(game.isKeyDown('right') || game.isKeyDown('up') || game.isKeyDown('down')) return
-      if(player.curAnim() !== "walk_left"){
+      if(players.find(player => player.id === socket.id)?.player.curAnim() !== "walk_left"){
         anim_play.value = "walk_left"
-        player.play('walk_left', {speed: 10, loop: true})
+        socket.emit('anim', "walk_left")
+        players.find(player => player.id === socket.id)?.player.play('walk_left', {speed: 10, loop: true})
       }else {
         return
       }
@@ -284,9 +278,10 @@ game.scene('game', () => {
 
     game.onKeyPress('right', () => {
       if(game.isKeyDown('left') || game.isKeyDown('up') || game.isKeyDown('down')) return
-      if(player.curAnim() !== "walk_right"){
+      if(players.find(player => player.id === socket.id)?.player.curAnim() !== "walk_right"){
         anim_play.value = "walk_right"
-        player.play('walk_right', {speed: 10, loop: true})
+        socket.emit('anim', "walk_right")
+        players.find(player => player.id === socket.id)?.player.play('walk_right', {speed: 10, loop: true})
       }else {
         return
       }
@@ -294,9 +289,10 @@ game.scene('game', () => {
 
     game.onKeyPress('up', () => {
       if(game.isKeyDown('left') || game.isKeyDown('right') || game.isKeyDown('down')) return
-      if(player.curAnim() !== "walk_up"){
+      if(players.find(player => player.id === socket.id)?.player.curAnim() !== "walk_up"){
         anim_play.value = "walk_up"
-        player.play('walk_up', {speed: 10, loop: true})
+        socket.emit('anim', "walk_up")
+        players.find(player => player.id === socket.id)?.player.play('walk_up', {speed: 10, loop: true})
       }else {
         return
       }
@@ -304,19 +300,29 @@ game.scene('game', () => {
 
     game.onKeyPress('down', () => {
       if(game.isKeyDown('left') || game.isKeyDown('right') || game.isKeyDown('up')) return
-      if(player.curAnim() !== "walk_down"){
+      if(players.find(player => player.id === socket.id)?.player.curAnim() !== "walk_down"){
         anim_play.value = "walk_down"
-        player.play('walk_down', {speed: 10, loop: true})
+        socket.emit('anim', "walk_down")
+        players.find(player => player.id === socket.id)?.player.play('walk_down', {speed: 10, loop: true})
       }else {
         return
       }
-    })*/
+    })
+
+    socket.on("changeAnimation", (args) => {
+      players.forEach(player => {
+        if(args.id === player.id && args.id !== socket.id){
+          player.player.play(args.anim, {speed: 10, loop: true})
+        }
+      })
+    })
+
 
 })
 
 game.go("game")
 
-game.debug.inspect = true
+game.debug.inspect = false
 
 </script>
 <style scoped>

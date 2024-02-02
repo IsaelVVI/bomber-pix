@@ -456,6 +456,20 @@
   resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-2.1.0.tgz#0709e9f4cb252351c609c6e6d8d6779a8d25edff"
   integrity sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==
 
+"@geckos.io/client@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@geckos.io/client/-/client-3.0.0.tgz#5aa7d809085e6dfd44dac0972cd652c3352de92c"
+  integrity sha512-v01k5Ilo8MkrPpVUxnJ7XvevrFWEpzp7WiMfz9iWUHclukZAR+0KvjYLMrAWdbZR6BBM4LMcTbmr5ez2KJwfpg==
+  dependencies:
+    "@geckos.io/common" "^3.0.0"
+
+"@geckos.io/common@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@geckos.io/common/-/common-3.0.0.tgz#8710165f4ebaaa4c51ad8387f88d779ef9519861"
+  integrity sha512-par4UePqom8dohWpiny/UWtFHs00F1HYmLj5qWupmYp4l4za48I1d0AGXG2S9yOc6Dm1e2xRrysoFaYr6QXfxQ==
+  dependencies:
+    "@yandeu/events" "0.0.6"
+
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ioredis/commands/-/commands-1.2.0.tgz#6d61b3097470af1fdbbe622795b8921d42018e11"
@@ -1706,6 +1720,11 @@
   integrity sha512-qFbXoxS44pi2FkgFjPvF4h7c9oMDutpyBdcJdMYIMg9XyXli2meFMuaKn+UMgsClo//Th6+beeCgqweT/79BVA==
   dependencies:
     vue-demi ">=0.14.6"
+
+"@yandeu/events@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@yandeu/events/-/events-0.0.6.tgz#34792ce8efab2ae7854fc1fdefc92c2d55a070a9"
+  integrity sha512-TDwm4kpur8fqWduqZmrgSc3VLYIOflroVB2JhsM8XxL7KrVzviCXdiEGdUmslGi+ymMl5VsmOlw1+5vjoAsQPg==
 
 abbrev@1:
   version "1.1.1"
