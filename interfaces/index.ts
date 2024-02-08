@@ -2,5 +2,12 @@ import type {AreaComp, BodyComp, GameObj, PosComp, SpriteComp, Vec2} from "kaboo
 
 export interface PlayerInterface {
     id: string,
+    text?: any,
     player:  GameObj<SpriteComp | AreaComp | BodyComp | PosComp | {dir: Vec2}>
+}
+
+
+
+export interface StatePlayersBomberInterface {
+
 }

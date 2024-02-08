@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: [
     '@vueuse/nuxt',
-    'nuxt-socket-io'
+    'nuxt-socket-io',
+    '@pinia/nuxt',
   ],
   ssr: false,
   postcss: {
@@ -20,5 +21,8 @@ export default defineNuxtConfig({
         url: 'ws://localhost:3003'
       }
     ]
-  }
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
 })

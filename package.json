@@ -18,10 +18,14 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@geckos.io/client": "^3.0.0",
+    "@pinia/nuxt": "^0.5.1",
     "@vueuse/nuxt": "^10.7.2",
+    "colyseus.js": "^0.15.17",
+    "grid-engine": "^2.44.0",
     "kaboom": "^3000.1.17",
     "nuxt-socket-io": "^3.0.13",
+    "peerjs": "^1.5.2",
+    "phaser": "^3.70.0",
     "socket.io-client": "^4.7.4"
   }
 }
