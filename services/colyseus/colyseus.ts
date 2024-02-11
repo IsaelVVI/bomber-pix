@@ -8,7 +8,7 @@ export class Server {
 
     constructor() {
         // this.client = new Client('ws://localhost:3030')
-        this.client = new Client('ws://wsgame.warezap.com')
+        this.client = new Client('https://wsgame.warezap.com')
     }
 
 
