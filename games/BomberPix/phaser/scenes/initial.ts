@@ -42,6 +42,11 @@ export class BomberPixInitial extends Phaser.Scene {
             frameWidth: 16,
             startFrame: 0
         })
+        /*this.load.spritesheet('rock', './assets/terrain/rock.png', {
+            frameHeight: 16,
+            frameWidth: 16,
+            startFrame: 0
+        })*/
         this.load.spritesheet('rock', './assets/terrain/rock.png', {
             frameHeight: 16,
             frameWidth: 16,
@@ -51,6 +56,17 @@ export class BomberPixInitial extends Phaser.Scene {
             frameHeight: 16,
             frameWidth: 16,
             endFrame: 5,
+        })
+        this.load.spritesheet('bomb', './assets/terrain/bomb2.png', {
+            frameHeight: 16,
+            frameWidth: 16,
+            spacing: 1,
+        })
+        this.load.spritesheet('explosion', './assets/terrain/explosion2.png', {
+            frameHeight: 16,
+            frameWidth: 16,
+            startFrame: 0,
+            endFrame: 24
         })
         this.load.spritesheet('bomber', './assets/characters/bomberman.png', {
             frameHeight: 32,

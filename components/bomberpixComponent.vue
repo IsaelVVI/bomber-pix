@@ -1,7 +1,4 @@
 <template>
-  <div id="bomber-pix">
-
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,8 +22,9 @@ const game = new phaser.Game({
       debug: true
     }
   },
-  width: 300,
-  height: 300,
+  pixelArt: true,
+  width: 240,
+  height: 240,
   type: Phaser.AUTO,
   plugins: {
     scene: [
@@ -45,7 +43,7 @@ const game = new phaser.Game({
   scene: [
     BomberPixInitial,
     BomberPix
-  ]
+  ],
 })
 
 
