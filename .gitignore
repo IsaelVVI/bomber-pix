@@ -8,6 +8,7 @@ dist
 
 # Node dependencies
 node_modules
+ecosystem.config.cjs
 
 # Logs
 logs
@@ -22,4 +23,3 @@ logs
 .env
 .env.*
 !.env.example
-.ecosystem.config.cjs
