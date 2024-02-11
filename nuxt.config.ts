@@ -22,6 +22,7 @@ export default defineNuxtConfig({
       }
     ]
   },
+  port: process.env.PORT,
   pinia: {
     storesDirs: ['./stores/**'],
   },

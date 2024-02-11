@@ -7,7 +7,8 @@ export class Server {
     all_rooms!: RoomAvailable[]
 
     constructor() {
-        this.client = new Client('ws://localhost:3030')
+        // this.client = new Client('ws://localhost:3030')
+        this.client = new Client('ws://wsgame.warezap.com')
     }
 
 
